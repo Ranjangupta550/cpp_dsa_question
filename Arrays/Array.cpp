@@ -64,36 +64,26 @@ void Array::showArray()
 }
 void Array::atSpecificIndex(int atindex, int data)
 {
-    if (lastindex < capacity-1)
+    if (atindex<0&&atindex>lastindex+1)
     {
+       cout<<"array out of bound"<<endl;
+    }
+    else if (isFull())
+    {
+        cout<<"array is full"<<endl;
 
-        if (atindex > -1 && atindex < capacity)
-        {
-
-            if (atindex > lastindex)
-            {
-                ++lastindex;
-                ptr[lastindex] = data;
-            }
-            else
-            {
-                ++lastindex;
-                for (int i = lastindex; i > atindex; i--)
-                {
-                    ptr[i] = ptr[i - 1];
-                }
-                ptr[atindex] = data;
-            }
-        }
-        else
-        {
-            cout << "Array out of bound"<<endl;
-        }
     }
     else
     {
-        cout << "array is full"<<endl;
+        for (int i = lastindex; i>=atindex; i--)
+        {
+           ptr[i+1]=ptr[i];
+        }
+        ptr[atindex]=data;
+        lastindex++;
+        
     }
+    
 }
 void Array::editElement(int atindex,int data){
     if(atindex>-1&&atindex<=lastindex){
@@ -167,6 +157,7 @@ Array::~Array()
 }
 int main()
 {
-    
-    return 0;
+    Array a1(8);
+    a1.atSpecificIndex(0,5);
+    a1.showArray();
 }
