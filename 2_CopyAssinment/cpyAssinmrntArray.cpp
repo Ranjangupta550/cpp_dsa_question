@@ -10,6 +10,8 @@ private:
 
 public:
     Array(int);
+    Array(Array &);
+    Array &operator=(Array &a);
     bool isEmpty();
     void append(int);
     void showArray();
@@ -37,6 +39,35 @@ Array::Array(int size)
     {
         cout << "Invalid Size" << endl;
     }
+}
+Array::Array(Array &a)
+{
+    capacity = a.capacity;
+    lastindex = a.lastindex;
+    ptr = new int[capacity];
+    for (int i = 0; i <= lastindex; i++)
+    {
+        ptr[i] = a.ptr[i];
+    }
+}
+Array &Array::operator=(Array &a)
+{
+    if (this != &a)
+    {
+        if (ptr != NULL)
+        {
+            delete[] ptr;
+        }
+
+        capacity = a.capacity;
+        lastindex = a.lastindex;
+        ptr = new int[capacity];
+        for (int i = 0; i <= lastindex; i++)
+        {
+            ptr[i] = a.ptr[i];
+        }
+    }
+    return *this;
 }
 bool Array::isEmpty()
 {
@@ -164,5 +195,4 @@ int main()
     a1.append(8);
     a1.append(9);
     a1.showArray();
-
 }
