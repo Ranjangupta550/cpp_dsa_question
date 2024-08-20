@@ -55,6 +55,7 @@ void SinglyLinkedList::insertAtLast(int data)
             temp = temp->next;
         }
         temp->next = temp2;
+        
     }
 }
 void SinglyLinkedList::insertatNode(int atnode, int val)
